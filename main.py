@@ -1,6 +1,7 @@
 from datetime import datetime
 import json
 import os
+from time import sleep
 from notionapi.reader import insert_item, query_items, query_latest_item_watched_at, update_item
 import pytz
 
@@ -67,4 +68,6 @@ def sync_from_trakt_to_notion():
 
 
 if __name__ == "__main__":
-    sync_from_trakt_to_notion()
+    while True:
+        sync_from_trakt_to_notion()
+        sleep(60)
