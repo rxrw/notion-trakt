@@ -6,11 +6,12 @@ from trakt import Trakt
 
 import six
 
+config_path = "/config"
 
 def _authenticate():
     authorization = None
     try:
-        with open("authorization.json", "r") as fp:
+        with open(config_path + "/authorization.json", "r") as fp:
             authorization = json.load(fp)
     except IOError:
         print("No authorization found, requesting new one")
@@ -27,8 +28,7 @@ def _authenticate():
     if not authorization:
         exit(1)
 
-    print("Authorization: %r" % authorization)
-    with open("authorization.json", "w") as fp:
+    with open(config_path + "/authorization.json", "w") as fp:
         json.dump(authorization, fp, indent=4)
     return authorization
 
