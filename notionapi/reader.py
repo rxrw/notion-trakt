@@ -56,15 +56,6 @@ def insert_item(
             "Tags": {"multi_select": [{"name": tag} for tag in tags]},
             "Trakt ID": {"number": int(trakt_id)},
             "Last Viewed At": {"date": {"start": str_last_viewed_at, "time_zone": "Asia/Shanghai"}},
-            "Poster": {
-                "files": [
-                    {
-                        "name": name,
-                        "type": "external",
-                        "external": {"url": poster_url},
-                    }
-                ]
-            },
             "Countries": {"multi_select": [{"name": country} for country in countries]},
             "Year": {"number": int(year)},
             "Release Date": {"date": {"start": release_date}},
@@ -78,6 +69,7 @@ def insert_item(
             "Production Companies": {"multi_select": [{"name": company} for company in production_companies]},
             "Tagline": {"rich_text": [{"text": {"content": tagline}}]},
         },
+        cover={"type": "external", "external": {"url": poster_url}},
     )
 
 

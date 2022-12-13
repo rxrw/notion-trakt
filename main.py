@@ -36,6 +36,7 @@ def sync_from_trakt_to_notion():
         else:
             print("Inserting", detail['title'])
             movie = tmdb.get_movie_detail(int(detail["ids"]["tmdb"]))
+
             tags = []
             for tag in movie["genres"]:
                 tags.append(tag["name"].replace(",", ""))
@@ -47,6 +48,7 @@ def sync_from_trakt_to_notion():
                 production_countries.append(country["name"].replace(",", ""))
             if "tagline" in movie and movie["tagline"] != "":
                 detail["tagline"] = movie["tagline"]
+            cover = movie["backdrop_path"] if "backdrop_path" in movie else movie["poster_path"]
             insert_item(database_id,
                         name=movie["title"],
                         tags=tags,
@@ -63,7 +65,7 @@ def sync_from_trakt_to_notion():
                         tagline=detail["tagline"] if "tagline" in detail else "",
                         english_name=detail["title"],
                         production_companies=production_companies,
-                        poster_url="https://image.tmdb.org/t/p/w500" + movie["poster_path"]
+                        poster_url="https://image.tmdb.org/t/p/w500" + cover,
                         )
 
 

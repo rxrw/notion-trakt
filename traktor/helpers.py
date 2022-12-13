@@ -6,7 +6,7 @@ from trakt import Trakt
 
 import six
 
-config_path = "/config"
+config_path = "."
 
 def _authenticate():
     authorization = None
